@@ -27,7 +27,7 @@ namespace Codecool.MissingDog.Repository
         /// <returns> IEnumerable of all Dogs instances and nulls. </returns>
         public IEnumerable<Dog> GetAllDogs()
         {
-            throw new NotImplementedException();
+            return _data.Dogs;
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Codecool.MissingDog.Repository
         /// <returns> Dog instance or null. </returns>
         public Dog GetDogById(int id)
         {
-            throw new NotImplementedException();
+            return _data.Dogs.SingleOrDefault(dog => dog?.Id == id);
         }
 
         /// <summary>
@@ -47,7 +47,9 @@ namespace Codecool.MissingDog.Repository
         /// <returns> Integer, representing Dogs count. </returns>
         public int GetCountOfDogsForTheOwnerOfDogWithId(int dogId)
         {
-            throw new NotImplementedException();
+            return _data.Owners.FirstOrDefault(
+                owner => owner?.Dogs.Any(dog => dog?.Id == dogId) ?? false)?
+                .Dogs.Count(dog => dog != null) ?? 0;
         }
 
         /// <summary>
